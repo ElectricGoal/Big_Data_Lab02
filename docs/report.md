@@ -87,6 +87,52 @@ The program uses a list of integers `ENCRYPT_COLS` to specify which fields need 
 
 The `stringToEncrypt` function takes a string as input and returns an encrypted string. The function first creates a `SecretKeySpec` object using the `SECRET_KEY` and the AES algorithm. It then creates a `Cipher` object using the same algorithm and initializes it in encryption mode with the secret key. The function then encrypts the input string using the `doFinal` method and encodes the result using Base64 encoding.
 
+#### Running process:
+
+**Step 1: Project Creation**
+
+File -> New -> Java Project -> project name: DeIdentifyData
+
+**Step 2: Package Creation**
+
+Right click project name -> New -> Package -> give package name as "com.deiddata" and then
+Click Finish button
+
+**Step 3: Class Creation**
+
+Right click project name -> New -> Class -> give class name as "DeIdentifyData” and then
+Click Finish button
+
+**Step 4: Add External Jars**
+
+Right click project name -> Build Path -> Configure Build Path... -> click Libraries pane -> Classpath -> Add External JARs -> file system ->
+
+![Add following External JARs](images/external_jars.png)
+
+Click Apply and Close button
+
+**Step 5: Copy the program from src folder**
+
+**Step 6: Export JAR file creation**
+
+Right click project name -> Export -> Java -> JAR file -> click Next button -> Select Export destination -> click Finish
+
+**Step 7: Program execution**
+
+```
+# Create new folder name "deiddata" in HDFS
+hadoop fs -mkdir -p deiddata
+
+# Create "input" folder in "deiddata" folder to store input file
+hadoop fs -mkdir -p deiddata/input
+
+# Put input.txt file from local into "input" directory
+hadoop fs -put /<local_file_path>/input.txt deiddata/input
+
+# Run mapreduce program
+hadoop jar DeIdData.jar com.deiddata deiddata/input/input.txt deiddata/output
+```
+
 ### Problem 7
 
 ### Problem 8
