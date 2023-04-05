@@ -127,11 +127,20 @@ hadoop fs -mkdir -p deiddata
 hadoop fs -mkdir -p deiddata/input
 
 # Put input.txt file from local into "input" directory
-hadoop fs -put /<local_file_path>/input.txt deiddata/input
+hadoop fs -put <local_file_path>/input.txt deiddata/input
 
 # Run mapreduce program
-hadoop jar DeIdData.jar com.deiddata deiddata/input/input.txt deiddata/output
+hadoop jar HdMapReduce/deIdHealth/DeIdData.jar com.deiddata.DeIdentifyData deiddata/input/input.txt deiddata/output
+
+# View output
+hadoop fs -cat deiddata/output/part-m-00000
 ```
+
+#### Result:
+
+![Run mapreduce program](images/prob6_1.png)
+
+![Compare to input](images/prob6_2.png)
 
 ### Problem 7
 
