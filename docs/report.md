@@ -201,6 +201,61 @@ The program has two classes: `CDRMapper`, `CDRReducer` and `main` function. `The
 
 The `CDRReducer` class receives the key-value pairs from the mapper, groups them by the phone number, and computes the total duration of each phone number. If the total duration of a phone number is greater than or equal to one hour (3600 seconds), it emits the phone number and the total duration as a key-value pair.
 
+#### Running process:
+
+**Step 1: Project Creation**
+
+File -> New -> Java Project -> project name: TelecomCallDataRecord
+
+**Step 2: Package Creation**
+
+Right click project name -> New -> Package -> give package name as "com.tcdr" and then
+Click Finish button
+
+**Step 3: Class Creation**
+
+Right click project name -> New -> Class -> give class name as "CallDataRecord” and then
+Click Finish button
+
+**Step 4: Add External Jars**
+
+Right click project name -> Build Path -> Configure Build Path... -> click Libraries pane -> Classpath -> Add External JARs -> file system ->
+
+![Add following External JARs](images/external_jars.png)
+
+Click Apply and Close button
+
+**Step 5: Copy the program from src folder**
+
+**Step 6: Export JAR file creation**
+
+Right click project name -> Export -> Java -> JAR file -> click Next button -> Select Export destination -> click Finish
+
+**Step 7: Program execution**
+
+```
+# Create new folder name "cdr" in HDFS
+hadoop fs -mkdir -p cdr
+
+# Create "input" folder in "cdr" folder to store input file
+hadoop fs -mkdir -p cdr/input
+
+# Put input.txt file from local into "input" directory
+hadoop fs -put <local_file_path>/input.txt cdr/input
+
+# Run mapreduce program
+hadoop jar <local_file_path>/CDR.jar com.tcdr.CallDataRecord cdr/input/input.txt cdr/output
+
+# View output
+hadoop fs -cat cdr/output/part-r-00000
+```
+
+#### Result:
+
+![Run mapreduce program](images/assignment9/prob9_1.png)
+
+![Compare to input](images/assignment9/prob9_2.png)
+
 ### Problem 10
 
 #### Solution idea:
@@ -220,6 +275,61 @@ The program consists of three classes: `CCMapper`, `CCCombiner`, and `CCReducer`
 `CCCombiner` is a local reducer that receives the output of the mapper and aggregates the values for each key by eliminating duplicates. The output of the combiner is a set of unique edges.
 
 `CCReducer` is responsible for computing the connected components of the graph using depth-first search (DFS). The reducer builds a map of each node and its neighbors, and initializes a visited map to keep track of which nodes have been visited. It then iterates through the nodes and performs DFS starting from each unvisited node. The DFS function updates the visited map to mark the nodes that have been visited. After DFS has been performed on all unvisited nodes, the reducer emits a single pair with a key of 0 and a value of the number of connected components found.
+
+#### Running process:
+
+**Step 1: Project Creation**
+
+File -> New -> Java Project -> project name: ConnectedComponent
+
+**Step 2: Package Creation**
+
+Right click project name -> New -> Package -> give package name as "com.cc" and then
+Click Finish button
+
+**Step 3: Class Creation**
+
+Right click project name -> New -> Class -> give class name as "ConnectedComponent” and then
+Click Finish button
+
+**Step 4: Add External Jars**
+
+Right click project name -> Build Path -> Configure Build Path... -> click Libraries pane -> Classpath -> Add External JARs -> file system ->
+
+![Add following External JARs](images/external_jars.png)
+
+Click Apply and Close button
+
+**Step 5: Copy the program from src folder**
+
+**Step 6: Export JAR file creation**
+
+Right click project name -> Export -> Java -> JAR file -> click Next button -> Select Export destination -> click Finish
+
+**Step 7: Program execution**
+
+```
+# Create new folder name "cdr" in HDFS
+hadoop fs -mkdir -p connected_components
+
+# Create "input" folder in "cdr" folder to store input file
+hadoop fs -mkdir -p connected_components/input
+
+# Put input.txt file from local into "input" directory
+hadoop fs -put <local_file_path>/input.txt connected_components/input
+
+# Run mapreduce program
+hadoop jar <local_file_path>/CC.jar com.cc.ConnectedComponent connected_components/input/input.txt connected_components/output
+
+# View output
+hadoop fs -cat connected_components/output/part-r-00000
+```
+
+#### Result:
+
+![Run mapreduce program](images/assignment10/prob10_1.png)
+
+![Compare to input](images/assignment10/prob10_2.png)
 
 ## References
 
