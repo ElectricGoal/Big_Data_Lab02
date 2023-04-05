@@ -93,6 +93,29 @@ The solution is to count the number of words of each length in a given text docu
 ![Output of assignment 2](images/assignment2/output.png)
 
 ### Problem 3
+#### Solution idea:
+Reads the weather data line by line and extracts the date, maximum temperature, and minimum temperature. Then compare them with the given min max temperature.
+#### Explain:
+`MaxTemperatureMapper` class is responsible for reading the weather data and emitting key-value pairs for hot and cold days. The mapper reads each line of the input file, extracts the date, maximum temperature, and minimum temperature, and checks if the maximum temperature is above a predefined `HOT_THRESHOLD` or if the minimum temperature is below a predefined `COLD_THRESHOLD`. If either of these conditions is true, the mapper emits a key-value pair with the date as the key and the temperature as the value.
+
+`MaxTemperatureReducer` class receives the key-value pairs emitted by the mapper and finds the maximum temperature for each date. The reducer iterates over the values for each key and finds the maximum value. It then emits a key-value pair with the date and maximum temperature.
+#### Running process:
+
+**Step 1: Put file weather_data.txt** 
+
+![put weather.txt](images/assignment3/put_weather_data.txt.png)
+
+**Step 2: Export Weather.jar**
+
+![export Weather.jar](images/assignment3/export_Weather.jar.png)
+
+**Step 3: Run Weather.jar**
+
+![run Weather.jar](images/assignment3/run_Weather.jar.png)
+
+#### Result:
+
+![output weather](images/assignment3/output_weather.png)
 
 ### Problem 4
 
