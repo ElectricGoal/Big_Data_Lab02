@@ -28,16 +28,16 @@ code-block-font-size: \scriptsize
 ## Team's result
 | Problem | Complete |
 | ------- | -------- |
-| 1 | 100% |
-| 2 | 100% |
-| 3 | 100% |
-| 4 | 100% |
-| 5 | 100% |
-| 6 | 100% |
-| 7 | 100% |
-| 8 | 100% |
-| 9 | 100% |
-| 10 | 100% |
+| 1       | 100%     |
+| 2       | 100%     |
+| 3       | 100%     |
+| 4       | 100%     |
+| 5       | 100%     |
+| 6       | 100%     |
+| 7       | 100%     |
+| 8       | 100%     |
+| 9       | 100%     |
+| 10      | 100%     |
 
 ## Team reflection
 
@@ -58,7 +58,39 @@ Lastly, we learned the importance of continuous learning and self-improvement. W
 
 ### Problem 1
 
+#### Solution idea:
+
+Read each line of data and split it into single words, then count the number of occurrences of each word
+#### Explain idea:
+
+1. The `Mapper` class: This class extends the Mapper abstract class and overrides the `map()` method. The `map()` method reads each line of the input text file, splits it into individual words, and emits a key-value pair of `(word, 1)`. The key is the individual word, and the value is a constant integer 1. This class also defines the data types of the input key-value pairs and the output key-value pairs.
+2. The `Reducer` class: This class extends the Reducer abstract class and overrides the `reduce()` method. The `reduce()` method receives a key-value pair of `(word, list of values)`, where the key is a word and the value is a list of integers (each integer represents a count of the word). The `reduce()` method sums up the values in the list and emits a key-value pair of `(word, sum of counts)`.
+
+#### One example:
+
+1. Input
+![input of assignment 1](images/assignment1/input.png)
+
+2. Output
+![Output of assignment 1](images/assignment1/output.png)
+
 ### Problem 2
+
+#### Solution idea:
+The solution is to count the number of words of each length in a given text document using the MapReduce programming model.
+#### Explain idea:
+1. The `Mapper` class, the `map()` method takes in a key-value pair consisting of a byte offset and a line of text, and emits intermediate key-value pairs consisting of the length of each word in the line and the value 1, and the same length with a value of 0. The `IntWritable` class is used to represent the integer keys and values.
+
+2. The `Reducer` class, the `reduce()` method takes in intermediate key-value pairs and sums up the values associated with each key, giving a final count of the number of words of each length. The results are written to output using the `context.write` method.
+
+3. The `WordSizeWordCount` class, the `main()` method sets up and runs the MapReduce job, configuring input and output paths, setting up the mapper and reducer classes, and specifying input and output formats. Finally, the job is executed using `job.waitForCompletion(true)`.
+#### One example:
+
+1. Input
+![input of assignment 2](images/assignment2/input.png)
+
+2. Output
+![Output of assignment 2](images/assignment2/output.png)
 
 ### Problem 3
 
@@ -127,24 +159,31 @@ hadoop fs -mkdir -p deiddata
 hadoop fs -mkdir -p deiddata/input
 
 # Put input.txt file from local into "input" directory
-hadoop fs -put <local_file_path>/input.txt deiddata/input
+hadoop fs -put /<local_file_path>/input.txt deiddata/input
 
 # Run mapreduce program
-hadoop jar HdMapReduce/deIdHealth/DeIdData.jar com.deiddata.DeIdentifyData deiddata/input/input.txt deiddata/output
-
-# View output
-hadoop fs -cat deiddata/output/part-m-00000
+hadoop jar DeIdData.jar com.deiddata deiddata/input/input.txt deiddata/output
 ```
-
-#### Result:
-
-![Run mapreduce program](images/prob6_1.png)
-
-![Compare to input](images/prob6_2.png)
 
 ### Problem 7
 
 ### Problem 8
+
+#### Solution idea:
+The program takes a dataset of music listening events and computes various statistics related to the number of times each song was listened to, the number of unique listeners, whether a song was shared, listened to on the radio, and skipped on the radio. The program also handles invalid records in the dataset by counting them and outputting the count at the end.
+#### Explain idea:
+1. The `Mapper` class: The code defines a Mapper class called `MusicStatsMapper` which extends the Hadoop MapReduce Mapper class. In the mapper, each record is split into its constituent parts and checked for validity, and if it is valid, the mapper emits key-value pairs where the key is a string representing the type of statistic to be calculated and the value is always 1. The keys are formed by concatenating the relevant prefix with the track ID. For example, `unique_listeners_123` indicates that the track with ID 123 has been played by a unique listener.
+
+2. The `Reducer` class: The code also defines a Reducer class called `MusicStatsReducer` which extends the Hadoop MapReduce Reducer class. In the reducer, the values for each key are summed up to calculate the total number of times the track was played or interacted with in the given way.
+
+3. The `Main` method of the code is responsible for setting up the Hadoop job by configuring it with the necessary classes and input/output paths. The job is executed and the counters are retrieved to print out the number of invalid records encountered during processing.
+#### One example:
+
+1. Input
+![input of assignment 2](images/assignment8/input.png)
+
+2. Output
+![Output of assignment 2](images/assignment8/output.png)
 
 ### Problem 9
 
