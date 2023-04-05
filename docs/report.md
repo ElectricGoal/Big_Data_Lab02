@@ -144,49 +144,21 @@ The `stringToEncrypt` function takes a string as input and returns an encrypted 
 
 #### Running process:
 
-**Step 1: Project Creation**
+**Step 1: Put file input.txt into HDFS**
 
-File -> New -> Java Project -> project name: DeIdentifyData
+![Put input.txt into HDFS](images/assignment6/prob6_3.png)
 
-**Step 2: Package Creation**
+**Step 2: Export DeIdData.jar**
 
-Right click project name -> New -> Package -> give package name as "com.deiddata" and then
-Click Finish button
+![Export DeIdData.jar](images/assignment6/prob6_4.png)
 
-**Step 3: Class Creation**
+**Step 3: Run MapReduce program**
 
-Right click project name -> New -> Class -> give class name as "DeIdentifyData” and then
-Click Finish button
+![Run MapReduce program](images/assignment6/prob6_1.png)
 
-**Step 4: Add External Jars**
+#### Result:
 
-Right click project name -> Build Path -> Configure Build Path... -> click Libraries pane -> Classpath -> Add External JARs -> file system ->
-
-![Add following External JARs](images/external_jars.png)
-
-Click Apply and Close button
-
-**Step 5: Copy the program from src folder**
-
-**Step 6: Export JAR file creation**
-
-Right click project name -> Export -> Java -> JAR file -> click Next button -> Select Export destination -> click Finish
-
-**Step 7: Program execution**
-
-```
-# Create new folder name "deiddata" in HDFS
-hadoop fs -mkdir -p deiddata
-
-# Create "input" folder in "deiddata" folder to store input file
-hadoop fs -mkdir -p deiddata/input
-
-# Put input.txt file from local into "input" directory
-hadoop fs -put /<local_file_path>/input.txt deiddata/input
-
-# Run mapreduce program
-hadoop jar DeIdData.jar com.deiddata deiddata/input/input.txt deiddata/output
-```
+![Output](images/assignment6/prob6_2.png)
 
 ### Problem 7
 
@@ -226,58 +198,21 @@ The `CDRReducer` class receives the key-value pairs from the mapper, groups them
 
 #### Running process:
 
-**Step 1: Project Creation**
+**Step 1: Put file input.txt into HDFS**
 
-File -> New -> Java Project -> project name: TelecomCallDataRecord
+![Put input.txt into HDFS](images/assignment9/prob9_3.png)
 
-**Step 2: Package Creation**
+**Step 2: Export CDR.jar**
 
-Right click project name -> New -> Package -> give package name as "com.tcdr" and then
-Click Finish button
+![Export CDR.jar](images/assignment9/prob9_4.png)
 
-**Step 3: Class Creation**
+**Step 3: Run MapReduce program**
 
-Right click project name -> New -> Class -> give class name as "CallDataRecord” and then
-Click Finish button
-
-**Step 4: Add External Jars**
-
-Right click project name -> Build Path -> Configure Build Path... -> click Libraries pane -> Classpath -> Add External JARs -> file system ->
-
-![Add following External JARs](images/external_jars.png)
-
-Click Apply and Close button
-
-**Step 5: Copy the program from src folder**
-
-**Step 6: Export JAR file creation**
-
-Right click project name -> Export -> Java -> JAR file -> click Next button -> Select Export destination -> click Finish
-
-**Step 7: Program execution**
-
-```
-# Create new folder name "cdr" in HDFS
-hadoop fs -mkdir -p cdr
-
-# Create "input" folder in "cdr" folder to store input file
-hadoop fs -mkdir -p cdr/input
-
-# Put input.txt file from local into "input" directory
-hadoop fs -put <local_file_path>/input.txt cdr/input
-
-# Run mapreduce program
-hadoop jar <local_file_path>/CDR.jar com.tcdr.CallDataRecord cdr/input/input.txt cdr/output
-
-# View output
-hadoop fs -cat cdr/output/part-r-00000
-```
+![Run MapReduce program](images/assignment9/prob9_1.png)
 
 #### Result:
 
-![Run mapreduce program](images/assignment9/prob9_1.png)
-
-![Compare to input](images/assignment9/prob9_2.png)
+![Output](images/assignment9/prob9_2.png)
 
 ### Problem 10
 
@@ -301,58 +236,21 @@ The program consists of three classes: `CCMapper`, `CCCombiner`, and `CCReducer`
 
 #### Running process:
 
-**Step 1: Project Creation**
+**Step 1: Put file input.txt into HDFS**
 
-File -> New -> Java Project -> project name: ConnectedComponent
+![Put input.txt into HDFS](images/assignment10/prob10_3.png)
 
-**Step 2: Package Creation**
+**Step 2: Export CC.jar**
 
-Right click project name -> New -> Package -> give package name as "com.cc" and then
-Click Finish button
+![Export CC.jar](images/assignment10/prob10_4.png)
 
-**Step 3: Class Creation**
+**Step 3: Run MapReduce program**
 
-Right click project name -> New -> Class -> give class name as "ConnectedComponent” and then
-Click Finish button
-
-**Step 4: Add External Jars**
-
-Right click project name -> Build Path -> Configure Build Path... -> click Libraries pane -> Classpath -> Add External JARs -> file system ->
-
-![Add following External JARs](images/external_jars.png)
-
-Click Apply and Close button
-
-**Step 5: Copy the program from src folder**
-
-**Step 6: Export JAR file creation**
-
-Right click project name -> Export -> Java -> JAR file -> click Next button -> Select Export destination -> click Finish
-
-**Step 7: Program execution**
-
-```
-# Create new folder name "cdr" in HDFS
-hadoop fs -mkdir -p connected_components
-
-# Create "input" folder in "cdr" folder to store input file
-hadoop fs -mkdir -p connected_components/input
-
-# Put input.txt file from local into "input" directory
-hadoop fs -put <local_file_path>/input.txt connected_components/input
-
-# Run mapreduce program
-hadoop jar <local_file_path>/CC.jar com.cc.ConnectedComponent connected_components/input/input.txt connected_components/output
-
-# View output
-hadoop fs -cat connected_components/output/part-r-00000
-```
+![Run MapReduce program](images/assignment10/prob10_1.png)
 
 #### Result:
 
-![Run mapreduce program](images/assignment10/prob10_1.png)
-
-![Compare to input](images/assignment10/prob10_2.png)
+![Output](images/assignment10/prob10_2.png)
 
 ## References
 
@@ -361,6 +259,8 @@ hadoop fs -cat connected_components/output/part-r-00000
 - Example: WordCount v1.0: https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Example:_WordCount_v1.0
 
 - Reducer (Apache Hadoop Main 2.7.5 API): https://hadoop.apache.org/docs/r2.7.5/api/org/apache/hadoop/mapreduce/Reducer.html#cleanup-org.apache.hadoop.mapreduce.Reducer.Context-
+
+- Sriram Balasubramanian, Hadoop-MapReduce Lab, 2016
 
 <!-- References with citing, this will be display as footnotes -->
 
