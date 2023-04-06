@@ -118,6 +118,27 @@ Reads the weather data line by line and extracts the date, maximum temperature, 
 ![output weather](images/assignment3/output_weather.png)
 
 ### Problem 4
+#### Solution idea: 
+Extract the patent id and the sub-patent id in Map.Then send it to Reduce for counting.
+#### Explain:
+In the class `map`, the input line is first converted to a String using the toString() method of the Text class. Then, a StringTokenizer object is created to split the line into tokens using space as the delimiter. The first token represents the patent ID, which is set as the key of the output tuple. The second token represents the sub-patent ID, which is set as the value of the output tuple. Finally, the output tuple (key, value) is written to the context using the write() method.
+In the class `reduce`, the number of sub-patents for each patent is counted by iterating through the list of sub-patent IDs and incrementing a counter variable for each sub-patent ID
+#### Running process:
+**Step 1: Put file patent** 
+
+![put patent](images/assignment4/put_patent.png)
+
+**Step 2: Export Patent.jar**
+
+![export Patent.jar](images/assignment4/export_Patent.jar.png)
+
+**Step 3: Run Patent.jar**
+
+![run Patent.jar](images/assignment4/run_Patent.jar.png)
+
+#### Result:
+
+![output patent](images/assignment4/output_patent.png)
 
 ### Problem 5
 
