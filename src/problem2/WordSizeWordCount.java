@@ -16,32 +16,42 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 public class WordSizeWordCount {
-
+  // Declare the Map class that inherits Mapper
   public static class Map extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
+    // Declare variable one as IntWritable with value 1
     private final static IntWritable one = new IntWritable(1);
+    // Declare variable zero as IntWritable with value 0
     private final static IntWritable zero = new IntWritable(0);
 
     @Override
     public void map(LongWritable key, Text value, Context context)
         throws IOException, InterruptedException {
+      // Get the input stream
       String line = value.toString();
+      // Split each word in the data stream with StringTokenizer
       StringTokenizer tokenizer = new StringTokenizer(line);
       while (tokenizer.hasMoreTokens()) {
         String word = tokenizer.nextToken().replaceAll("[^a-zA-Z0-9]", "");
+        // Get the length of the word
         int length = word.length();
+        // Write out the context of the word length and the value one
         context.write(new IntWritable(length), one);
+        // Write out the context of the word length and the value zero
         context.write(new IntWritable(length), zero);
       }
     }
   }
 
+  // Declare Reduce class to inherit Reducer
   public static class Reduce extends Reducer<IntWritable, IntWritable, IntWritable, IntWritable> {
 
     @Override
     public void reduce(IntWritable key, Iterable<IntWritable> values, Context context)
         throws IOException, InterruptedException {
       int count = 0;
+      // Iterate through the values in values
       for (IntWritable value : values) {
+        // Add the value of value to the counter variable count
         count += value.get();
       }
       context.write(key, new IntWritable(count));
@@ -50,6 +60,7 @@ public class WordSizeWordCount {
 
   public static void main(String[] args) throws Exception {
     Configuration conf = new Configuration();
+    // Initialize Job object with Configuration and job name "Wordsize"
     Job job = Job.getInstance(conf, "Wordsize");
     job.setJarByClass(WordSizeWordCount.class);
     job.setMapperClass(Map.class);
