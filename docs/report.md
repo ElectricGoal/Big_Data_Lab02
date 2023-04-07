@@ -66,13 +66,19 @@ Read each line of data and split it into single words, then count the number of 
 1. The `Mapper` class: This class extends the Mapper abstract class and overrides the `map()` method. The `map()` method reads each line of the input text file, splits it into individual words, and emits a key-value pair of `(word, 1)`. The key is the individual word, and the value is a constant integer 1. This class also defines the data types of the input key-value pairs and the output key-value pairs.
 2. The `Reducer` class: This class extends the Reducer abstract class and overrides the `reduce()` method. The `reduce()` method receives a key-value pair of `(word, list of values)`, where the key is a word and the value is a list of integers (each integer represents a count of the word). The `reduce()` method sums up the values in the list and emits a key-value pair of `(word, sum of counts)`.
 
-#### One example:
+#### Running Process:
 
-1. Input
-![input of assignment 1](images/assignment1/input.png)
+**Step 1: Create a input folder, output folder and put input file** 
+![input of assignment 1](images/assignment1/put_file.png)
 
-2. Output
-![Output of assignment 1](images/assignment1/output.png)
+**Step 2: Export file jar** 
+![input of assignment 1](images/assignment1/create_jar.png)
+
+**Step 3: Running jar** 
+![input of assignment 1](images/assignment1/run.png)
+
+**Step 4: Check result** 
+![input of assignment 1](images/assignment1/result.png)
 
 ### Problem 2
 
@@ -84,13 +90,19 @@ The solution is to count the number of words of each length in a given text docu
 2. The `Reducer` class, the `reduce()` method takes in intermediate key-value pairs and sums up the values associated with each key, giving a final count of the number of words of each length. The results are written to output using the `context.write` method.
 
 3. The `WordSizeWordCount` class, the `main()` method sets up and runs the MapReduce job, configuring input and output paths, setting up the mapper and reducer classes, and specifying input and output formats. Finally, the job is executed using `job.waitForCompletion(true)`.
-#### One example:
+#### Running Process:
 
-1. Input
-![input of assignment 2](images/assignment2/input.png)
+**Step 1: Create a input folder, output folder and put input file** 
+![input of assignment 2](images/assignment2/put_file.png)
 
-2. Output
-![Output of assignment 2](images/assignment2/output.png)
+**Step 2: Export file jar** 
+![input of assignment 2](images/assignment2/create_jar.png)
+
+**Step 3: Running jar** 
+![input of assignment 2](images/assignment2/run.png)
+
+**Step 4: Check result** 
+![input of assignment 2](images/assignment2/result.png)
 
 ### Problem 3
 #### Solution idea:
@@ -193,13 +205,19 @@ The program takes a dataset of music listening events and computes various stati
 2. The `Reducer` class: The code also defines a Reducer class called `MusicStatsReducer` which extends the Hadoop MapReduce Reducer class. In the reducer, the values for each key are summed up to calculate the total number of times the track was played or interacted with in the given way.
 
 3. The `Main` method of the code is responsible for setting up the Hadoop job by configuring it with the necessary classes and input/output paths. The job is executed and the counters are retrieved to print out the number of invalid records encountered during processing.
-#### One example:
+#### Running Process:
 
-1. Input
-![input of assignment 2](images/assignment8/input.png)
+**Step 1: Create a input folder, output folder and put input file** 
+![input of assignment 8](images/assignment8/put_file.png)
 
-2. Output
-![Output of assignment 2](images/assignment8/output.png)
+**Step 2: Export file jar** 
+![input of assignment 8](images/assignment8/create_jar.png)
+
+**Step 3: Running jar** 
+![input of assignment 8](images/assignment8/run.png)
+
+**Step 4: Check result** 
+![input of assignment 8](images/assignment8/result.png)
 
 ### Problem 9
 
