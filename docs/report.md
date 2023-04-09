@@ -43,18 +43,20 @@ code-block-font-size: \scriptsize
 
 **Does your journey to the deadline have any bugs? How have you overcome it?**
 
-During the journey towards the deadline, we encountered several bugs that were related to Ubuntu, Hadoop installation, and errors while running Hadoop MapReduce jobs. In order to overcome these challenges, we had to invest more time and effort. We also conducted research by reading documentation and watching tutorial videos. These resources provided us with useful insights and ideas for troubleshooting the issues. Additionally, we scheduled some online meetings to discuss and solve the problems together. Through these efforts, we were able to solve most of the problems we encountered and successfully complete the project.
+During our MapReduce Hadoop Java project, we faced a few logical bugs. One example was when we were implementing a custom reducer function that was not producing the expected output. After investigating, we discovered that the issue was with our implementation of the function. Specifically, we had made an error in the logic of our code that resulted in incorrect output.
+
+To overcome this bug, we first used debugging tools to identify the source of the issue. Once we had identified the function as the problem area, we took a closer look at our code and worked to identify the error in our logic. We also discussed the issue as a team and reviewed each other's code to find potential solutions.
+
+Ultimately, we were able to solve the issue by correcting the logical error in our reducer function. We also added additional unit tests to ensure that the function was producing the correct output. Through this process, we learned the importance of careful code review and testing, as well as the importance of understanding the logic of our code in-depth.
 
 **What have you learned after this process?**
 
-Firstly, we learned the importance of clear communication among team members to ensure that everyone is on the same page and that tasks are completed efficiently. We also learned the importance of testing and debugging to ensure that any errors are caught and resolved early on in the process.
-
-Secondly, we learned the importance of time management and task prioritization, as we encountered some unexpected challenges during the installation and setup process. This made it necessary for us to adjust our timeline and focus on the most critical tasks first.
-
-Lastly, we learned the importance of continuous learning and self-improvement. We encountered some roadblocks that required us to do additional research and seek out new solutions, which allowed us to expand our knowledge and skills in Hadoop and MapReduce.
+We gained a deeper understanding of the MapReduce Hadoop Java platform by working through the bugs and exploring different solutions. This experience helped us improve our knowledge of the platform and be better prepared to tackle similar challenges in the future.
 
 
 ## Problems
+
+We coded some of the problems ourselves, while for other problems, we referred to the solutions.
 
 ### Problem 1
 
@@ -156,6 +158,8 @@ In the class `reduce`, the number of sub-patents for each patent is counted by i
 
 ### Problem 6
 
+### Problem 7
+
 The problem statement in the book was unclear, and I had to conduct some internet research to understand the nature of the problem.
 
 #### Solution idea:
@@ -179,21 +183,19 @@ The `stringToEncrypt` function takes a string as input and returns an encrypted 
 
 **Step 1: Put file input.txt into HDFS**
 
-![Put input.txt into HDFS](images/assignment6/prob6_3.png)
+![Put input.txt into HDFS](images/assignment7/prob7_3.png)
 
 **Step 2: Export DeIdData.jar**
 
-![Export DeIdData.jar](images/assignment6/prob6_4.png)
+![Export DeIdData.jar](images/assignment7/prob7_4.png)
 
 **Step 3: Run MapReduce program**
 
-![Run MapReduce program](images/assignment6/prob6_1.png)
+![Run MapReduce program](images/assignment7/prob7_1.png)
 
 #### Result:
 
-![Output](images/assignment6/prob6_2.png)
-
-### Problem 7
+![Output](images/assignment7/prob7_2.png)
 
 ### Problem 8
 
