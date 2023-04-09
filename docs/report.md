@@ -156,7 +156,63 @@ In the class `reduce`, the number of sub-patents for each patent is counted by i
 
 ### Problem 5
 
+#### Solution idea:
+
+The `mapper` extracts the year and temperature values and emits them as key-value pairs, where the year is the key and the temperature is the value. The `reducer` receives all key-value pairs within the same year and calculates the maximum temperature for that year.
+
+#### Explain:
+
+The `mapper` reads the input dataset line by line and tokenizes each line using whitespace as the delimiter. It checks whether the first token is a 4-digit number and sets the "year" variable accordingly. If the token is not a year, it assumes it is a temperature and sets the "temperature" variable accordingly. It then emits a (key, value) pair, where the key is the year and the value is the temperature.
+
+The `reducer` receives these (key, value) pairs, where the key is the year and the value is a list of temperatures. It iterates over the list of temperatures and finds the maximum temperature for that year. It then emits a (key, value) pair, where the key is the year and the value is the maximum temperature.
+
+#### Running process:
+
+**Step 1: Put file Temperature.txt into HDFS**
+
+![Put input.txt into HDFS](images/assignment5/prob5_1.png)
+
+**Step 2: Export MaxTemp.jar**
+
+![Export DeIdData.jar](images/assignment5/prob5_2.png)
+
+**Step 3: Run MapReduce program**
+
+![Run MapReduce program](images/assignment5/prob5_3.png)
+
+#### Result:
+
+![Output](images/assignment5/prob5_4.png)
+
 ### Problem 6
+
+#### Solution idea:
+
+The program consists of a `mapper` class, which reads input data and emits key-value pairs of department IDs and salaries, and a `reducer` class, which receives the key-value pairs from the mapper, calculates the average salary for each department, and outputs the result.
+
+#### Explain:
+
+In the `mapper` class `avgMapper`, each line of input is split into three fields separated by tabs. The first field represents the department id, the second field represents the employee name, and the third field represents the salary. The department id and salary are extracted and stored in `Text` and `FloatWritable` objects, respectively, and emitted as key-value pairs.
+
+In the `reducer` class `avgReduce`r, the input key-value pairs are grouped by department id, and the average salary is calculated for each department. The `reduce()` method iterates over the values and calculates the sum and count of salaries for each department. Finally, the average salary is calculated as the sum divided by the count, and the result is emitted as a key-value pair.
+
+#### Running process:
+
+**Step 1: Put file salary.txt into HDFS**
+
+![Put input.txt into HDFS](images/assignment6/prob6_1.png)
+
+**Step 2: Export AverageSalary.jar**
+
+![Export DeIdData.jar](images/assignment6/prob6_2.png)
+
+**Step 3: Run MapReduce program**
+
+![Run MapReduce program](images/assignment6/prob6_3.png)
+
+#### Result:
+
+![Output](images/assignment6/prob6_4.png)
 
 ### Problem 7
 
