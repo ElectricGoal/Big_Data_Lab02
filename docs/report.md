@@ -194,11 +194,11 @@ The `reducer` receives these (key, value) pairs, where the key is the year and t
 
 **Step 1: Put file Temperature.txt into HDFS**
 
-![Put input.txt into HDFS](images/assignment5/prob5_1.png)
+![Put Temperature.txt into HDFS](images/assignment5/prob5_1.png)
 
 **Step 2: Export MaxTemp.jar**
 
-![Export DeIdData.jar](images/assignment5/prob5_2.png)
+![Export MaxTemp.jar](images/assignment5/prob5_2.png)
 
 **Step 3: Run MapReduce program**
 
@@ -209,6 +209,8 @@ The `reducer` receives these (key, value) pairs, where the key is the year and t
 ![Output](images/assignment5/prob5_4.png)
 
 ### Problem 6
+
+This code is taken from file: LabRequirment.pdf
 
 #### Solution idea:
 
@@ -224,11 +226,11 @@ In the `reducer` class `avgReduce`r, the input key-value pairs are grouped by de
 
 **Step 1: Put file salary.txt into HDFS**
 
-![Put input.txt into HDFS](images/assignment6/prob6_1.png)
+![Put salary.txt into HDFS](images/assignment6/prob6_1.png)
 
 **Step 2: Export AverageSalary.jar**
 
-![Export DeIdData.jar](images/assignment6/prob6_2.png)
+![Export AverageSalary.jar](images/assignment6/prob6_2.png)
 
 **Step 3: Run MapReduce program**
 
