@@ -60,8 +60,8 @@ public class WordSizeWordCount {
 
   public static void main(String[] args) throws Exception {
     Configuration conf = new Configuration();
-    // Initialize Job object with Configuration and job name "Wordsize"
-    Job job = Job.getInstance(conf, "Wordsize");
+    // Initialize Job object with Configuration and job name "WordSize"
+    Job job = Job.getInstance(conf, "WordSize");
     job.setJarByClass(WordSizeWordCount.class);
     job.setMapperClass(Map.class);
     job.setReducerClass(Reduce.class);

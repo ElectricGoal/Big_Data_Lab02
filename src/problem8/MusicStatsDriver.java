@@ -14,7 +14,7 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-public class MusicStatsDriver {
+public class UniqueListener {
 	// Constants used in parsing LastFM data
 	public static class LastFMConstants {
 		public static final int USER_ID = 0;
@@ -29,8 +29,8 @@ public class MusicStatsDriver {
 		INVALID_RECORD_COUNT
 	};
 
-	// Mapper class for MusicStatsDriver
-	public static class MusicStatsMapper extends Mapper<Object, Text, Text, IntWritable> {
+	// Mapper class for UniqueListener
+	public static class UniqueListenerMapper extends Mapper<Object, Text, Text, IntWritable> {
 		private final static IntWritable ONE = new IntWritable(1);
 		private Text trackId = new Text();
 
@@ -67,8 +67,8 @@ public class MusicStatsDriver {
 		}
 	}
 
-	// Reducer class for MusicStatsDriver
-	public static class MusicStatsReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+	// Reducer class for UniqueListener
+	public static class UniqueListenerReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 
 		// Reduce function to sum values and write output to context
 		public void reduce(Text key, Iterable<IntWritable> values, Context context)
@@ -86,13 +86,13 @@ public class MusicStatsDriver {
 		// Create Hadoop job and set configuration
 		Configuration conf = new Configuration();
 		if (args.length != 2) {
-			System.err.println("Usage: MusicStatsDriver <input path> <output path>");
+			System.err.println("Usage: MusicStatsDriver <input> <output>");
 			System.exit(2);
 		}
 		Job job = new Job(conf, "Music Statistics");
-		job.setJarByClass(MusicStatsDriver.class);
-		job.setMapperClass(MusicStatsMapper.class);
-		job.setReducerClass(MusicStatsReducer.class);
+		job.setJarByClass(UniqueListener.class);
+		job.setMapperClass(UniqueListener.class);
+		job.setReducerClass(UniqueListener.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 
