@@ -14,7 +14,7 @@ classoption: oneside
 code-block-font-size: \scriptsize
 ---
 
-# Lab 01: A Gentle Introduction to Hadoop
+# Lab 02: MapReduce Programming
 
 ## List of team members
 
@@ -63,56 +63,74 @@ We coded some of the problems ourselves, while for other problems, we referred t
 #### Solution idea:
 
 Read each line of data and split it into single words, then count the number of occurrences of each word
-#### Explain idea:
+
+#### Explain:
 
 1. The `Mapper` class: This class extends the Mapper abstract class and overrides the `map()` method. The `map()` method reads each line of the input text file, splits it into individual words, and emits a key-value pair of `(word, 1)`. The key is the individual word, and the value is a constant integer 1. This class also defines the data types of the input key-value pairs and the output key-value pairs.
 2. The `Reducer` class: This class extends the Reducer abstract class and overrides the `reduce()` method. The `reduce()` method receives a key-value pair of `(word, list of values)`, where the key is a word and the value is a list of integers (each integer represents a count of the word). The `reduce()` method sums up the values in the list and emits a key-value pair of `(word, sum of counts)`.
 
-#### Running Process:
+#### Running process:
 
 **Step 1: Create a input folder, output folder and put input file** 
+
 ![input of assignment 1](images/assignment1/put_file.png)
 
 **Step 2: Export file jar** 
+
 ![input of assignment 1](images/assignment1/create_jar.png)
 
 **Step 3: Running jar** 
+
 ![input of assignment 1](images/assignment1/run.png)
 
-**Step 4: Check result** 
+#### Result:
+
 ![input of assignment 1](images/assignment1/result.png)
 
 ### Problem 2
 
 #### Solution idea:
+
 The solution is to count the number of words of each length in a given text document using the MapReduce programming model.
-#### Explain idea:
+
+#### Explain:
+
 1. The `Mapper` class, the `map()` method takes in a key-value pair consisting of a byte offset and a line of text, and emits intermediate key-value pairs consisting of the length of each word in the line and the value 1, and the same length with a value of 0. The `IntWritable` class is used to represent the integer keys and values.
 
 2. The `Reducer` class, the `reduce()` method takes in intermediate key-value pairs and sums up the values associated with each key, giving a final count of the number of words of each length. The results are written to output using the `context.write` method.
 
 3. The `WordSizeWordCount` class, the `main()` method sets up and runs the MapReduce job, configuring input and output paths, setting up the mapper and reducer classes, and specifying input and output formats. Finally, the job is executed using `job.waitForCompletion(true)`.
-#### Running Process:
+
+#### Running process:
 
 **Step 1: Create a input folder, output folder and put input file** 
+
 ![input of assignment 2](images/assignment2/put_file.png)
 
 **Step 2: Export file jar** 
+
 ![input of assignment 2](images/assignment2/create_jar.png)
 
 **Step 3: Running jar** 
+
 ![input of assignment 2](images/assignment2/run.png)
 
-**Step 4: Check result** 
+#### Result:
+
 ![input of assignment 2](images/assignment2/result.png)
 
 ### Problem 3
+
 #### Solution idea:
+
 Reads the weather data line by line and extracts the date, maximum temperature, and minimum temperature. Then compare them with the given min max temperature.
+
 #### Explain:
+
 `MaxTemperatureMapper` class is responsible for reading the weather data and emitting key-value pairs for hot and cold days. The mapper reads each line of the input file, extracts the date, maximum temperature, and minimum temperature, and checks if the maximum temperature is above a predefined `HOT_THRESHOLD` or if the minimum temperature is below a predefined `COLD_THRESHOLD`. If either of these conditions is true, the mapper emits a key-value pair with the date as the key and the temperature as the value.
 
 `MaxTemperatureReducer` class receives the key-value pairs emitted by the mapper and finds the maximum temperature for each date. The reducer iterates over the values for each key and finds the maximum value. It then emits a key-value pair with the date and maximum temperature.
+
 #### Running process:
 
 **Step 1: Put file weather_data.txt** 
@@ -132,12 +150,18 @@ Reads the weather data line by line and extracts the date, maximum temperature, 
 ![output weather](images/assignment3/output_weather.png)
 
 ### Problem 4
+
 #### Solution idea: 
+
 Extract the patent id and the sub-patent id in Map.Then send it to Reduce for counting.
+
 #### Explain:
+
 In the class `map`, the input line is first converted to a String using the toString() method of the Text class. Then, a StringTokenizer object is created to split the line into tokens using space as the delimiter. The first token represents the patent ID, which is set as the key of the output tuple. The second token represents the sub-patent ID, which is set as the value of the output tuple. Finally, the output tuple (key, value) is written to the context using the write() method.
 In the class `reduce`, the number of sub-patents for each patent is counted by iterating through the list of sub-patent IDs and incrementing a counter variable for each sub-patent ID
+
 #### Running process:
+
 **Step 1: Put file patent** 
 
 ![put patent](images/assignment4/put_patent.png)
@@ -256,25 +280,33 @@ The `stringToEncrypt` function takes a string as input and returns an encrypted 
 ### Problem 8
 
 #### Solution idea:
+
 The program takes a dataset of music listening events and computes various statistics related to the number of times each song was listened to, the number of unique listeners, whether a song was shared, listened to on the radio, and skipped on the radio. The program also handles invalid records in the dataset by counting them and outputting the count at the end.
-#### Explain idea:
+
+#### Explain:
+
 1. The `Mapper` class: The code defines a Mapper class called `MusicStatsMapper` which extends the Hadoop MapReduce Mapper class. In the mapper, each record is split into its constituent parts and checked for validity, and if it is valid, the mapper emits key-value pairs where the key is a string representing the type of statistic to be calculated and the value is always 1. The keys are formed by concatenating the relevant prefix with the track ID. For example, `unique_listeners_123` indicates that the track with ID 123 has been played by a unique listener.
 
 2. The `Reducer` class: The code also defines a Reducer class called `MusicStatsReducer` which extends the Hadoop MapReduce Reducer class. In the reducer, the values for each key are summed up to calculate the total number of times the track was played or interacted with in the given way.
 
 3. The `Main` method of the code is responsible for setting up the Hadoop job by configuring it with the necessary classes and input/output paths. The job is executed and the counters are retrieved to print out the number of invalid records encountered during processing.
-#### Running Process:
+
+#### Running process:
 
 **Step 1: Create a input folder, output folder and put input file** 
+
 ![input of assignment 8](images/assignment8/put_file.png)
 
 **Step 2: Export file jar** 
+
 ![input of assignment 8](images/assignment8/create_jar.png)
 
 **Step 3: Running jar** 
+
 ![input of assignment 8](images/assignment8/run.png)
 
-**Step 4: Check result** 
+#### Result:
+
 ![input of assignment 8](images/assignment8/result.png)
 
 ### Problem 9
