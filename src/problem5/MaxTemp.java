@@ -13,55 +13,63 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class MaxTemp {
 
-  public static class TemperatureMapper
-       extends Mapper<Object, Text, Text, IntWritable>{
+  //Mapper class that maps each input record to a key-value pair
+  public static class tempMapper extends Mapper<Object, Text, Text, IntWritable>{
 
-    private final static IntWritable temperature = new IntWritable();
+    private final static IntWritable temp = new IntWritable();
+  //Defining a local variable year of type Text
     private Text year = new Text();
 
-    public void map(Object key, Text value, Context context
-                    ) throws IOException, InterruptedException {
-      StringTokenizer itr = new StringTokenizer(value.toString());
-      while (itr.hasMoreTokens()) {
-        String token = itr.nextToken();
-        if (token.length() == 4) { // Check if token is a year
+    public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+      //Split each record into tokens
+      StringTokenizer Tokenizer = new StringTokenizer(value.toString());
+      while (Tokenizer.hasMoreTokens()) {
+        String token = Tokenizer.nextToken();
+        //Check token is a year
+        if (Integer.parseInt(token) >= 1000) { 
           year.set(token);
-        } else { // Assume token is a temperature
-          temperature.set(Integer.parseInt(token));
-          context.write(year, temperature);
+        } else { 
+          temp.set(Integer.valueOf(token));
+          //the key-value pair
+          context.write(year, temp);
         }
       }
     }
   }
 
-  public static class TemperatureReducer
-       extends Reducer<Text,IntWritable,Text,IntWritable> {
+  //Reducer class that finds the maximum temp for each year
+  public static class tempReducer extends Reducer<Text,IntWritable,Text,IntWritable> {
 
     private IntWritable result = new IntWritable();
 
-    public void reduce(Text key, Iterable<IntWritable> values,
-                       Context context
-                       ) throws IOException, InterruptedException {
-      int maxTemperature = Integer.MIN_VALUE;
+    public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+      int maxtemp = -238;
+      //Find the maximum temp
       for (IntWritable val : values) {
-        maxTemperature = Math.max(maxTemperature, val.get());
+    	  if( maxtemp < val.get())
+    	  {
+    		  maxtemp = val.get();
+    	  }
       }
-      result.set(maxTemperature);
+      result.set(maxtemp);
+      //the key-value pair
       context.write(key, result);
     }
   }
 
   public static void main(String[] args) throws Exception {
     Configuration conf = new Configuration();
-    Job job = Job.getInstance(conf, "max temperature");
+    Job job = Job.getInstance(conf, "MaxTemp");
     job.setJarByClass(MaxTemp.class);
-    job.setMapperClass(TemperatureMapper.class);
-    job.setCombinerClass(TemperatureReducer.class);
-    job.setReducerClass(TemperatureReducer.class);
+    job.setMapperClass(tempMapper.class);
+    job.setCombinerClass(tempReducer.class);
+    job.setReducerClass(tempReducer.class);
     job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(IntWritable.class);
-    FileInputFormat.addInputPath(job, new Path(args[0]));
-    FileOutputFormat.setOutputPath(job, new Path(args[1]));
-    System.exit(job.waitForCompletion(true) ? 0 : 1);
+    Path p=new Path(args[0]);
+    Path p1=new Path(args[1]);
+    FileInputFormat.addInputPath(job,p);
+    FileOutputFormat.setOutputPath(job,p1);
+    job.waitForCompletion(true);
   }
 }
